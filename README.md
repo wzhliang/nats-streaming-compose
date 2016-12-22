@@ -1,6 +1,8 @@
 Create a docker compose file to cluster three instances of nats-streaming server.  We use a docker custom network, which allows containers to refer to each other
 by hostname.
 
+Put this in a file named *docker-compose.yaml*:
+
 ```
 version: '2'
 networks:
@@ -58,6 +60,7 @@ Define a not-seed.cfg, notseed.cfg:
 
 ```
 # Cluster not-a-seed node
+
 listen: 0.0.0.0:4222
 http: 8222
 
@@ -69,12 +72,15 @@ cluster {
 }
 ```
 
-Start the cluster
+Start the cluster, detaching from the terminal.
+
 
 ```bash
-$ docker-compose up -d
+$ docker-compose -f docker-compose.yaml up -d
 ```
+
 and have a look at the running containers
+
 
 ```bash
 $ docker ps
@@ -115,7 +121,7 @@ $ docker logs dbd
 ```
 
 So are the instances really clustered?  How to know?  Try querying each admin server for connect_urls, which seems to show the cluster is assembled.  
-Is it?  Seems like it.
+Is it?  
 
 ```
 $ for i in 2 3 4 ; do curl -s http://localhost:822${i}/varz | jq .connect_urls ; done
