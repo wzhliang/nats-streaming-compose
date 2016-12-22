@@ -79,7 +79,7 @@ Start the cluster, detaching from the terminal.
 $ docker-compose -f docker-compose.yaml up -d
 ```
 
-and have a look at the running containers
+Have a look at the running containers
 
 
 ```bash
