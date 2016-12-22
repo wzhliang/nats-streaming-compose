@@ -1,5 +1,7 @@
-Create a docker compose file to cluster three instances of nats-streaming server.  We use a docker custom network, which allows containers to refer to each other
-by hostname.
+Create a docker compose file to cluster three instances of
+nats-streaming server.  We use a docker [custom
+network](https://docs.docker.com/engine/reference/commandline/network_create/),
+which allows containers to refer to each other by hostname.
 
 Put this in a file named *docker-compose.yaml*:
 
