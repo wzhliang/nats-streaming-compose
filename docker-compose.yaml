@@ -3,13 +3,14 @@ networks:
   nats-net:
     ipam:
       config:
-      - subnet: 172.25.0.0/16
+      - subnet: 172.35.0.0/16
 services:
   nats-1:
     image: nats-streaming
-    command: --config /server.cfg --cluster_id nats-1
+    command: --config /server.cfg --cluster_id test
     volumes:
     - ./seed.cfg:/server.cfg
+    - /store
     networks:
     - nats-net
     ports:
@@ -17,9 +18,10 @@ services:
     - 8222:8222
   nats-2:
     image: nats-streaming
-    command: --config /server.cfg --cluster_id nats-2
+    command: --config /server.cfg --cluster_id test
     volumes:
     - ./notseed.cfg:/server.cfg
+    - /store
     networks:
     - nats-net
     ports:
@@ -27,9 +29,10 @@ services:
     - 8223:8222
   nats-3:
     image: nats-streaming
-    command: --config /server.cfg --cluster_id nats-3
+    command: --config /server.cfg --cluster_id test
     volumes: 
     - ./notseed.cfg:/server.cfg 
+    - /store
     networks: 
     - nats-net 
     ports:
